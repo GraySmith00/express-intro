@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const data = require('./data');
 
 app.use(express.static('public'));
 
@@ -13,12 +14,14 @@ const timeLogger = (req, res, next) => {
   next();
 };
 
+app.use(urlLogger, timeLogger);
+
 app.get('/', (req, res) => {
   res.send('hello world');
 });
 
-app.get('/json', urlLogger, timeLogger, (req, res) => {
-  res.status(200).json({ name: 'Gray' });
+app.get('/json', (req, res) => {
+  res.status(200).json(data);
 });
 
 app.listen(3000, () => {
