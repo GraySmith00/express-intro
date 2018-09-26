@@ -24,6 +24,11 @@ app.get('/json', (req, res) => {
   res.status(200).json(data);
 });
 
+const notFound = (req, res, next) => {
+  res.status(404).send('Hmmm sorry could not find that page');
+};
+app.use(notFound);
+
 app.listen(3000, () => {
   console.log('Express intro running on PORT 3000');
 });
